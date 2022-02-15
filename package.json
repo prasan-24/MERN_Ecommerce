@@ -1,0 +1,30 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "Ecommerce Website",
+  "main": "lodash.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "prasanna",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-jwt": "^6.1.0",
+    "express-validator": "^5.3.1",
+    "formidable": "^1.2.6",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^1.0.0",
+    "mongoose": "^6.0.9",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.13",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "gulp-jshint": "^2.1.0"
+  }
+}
