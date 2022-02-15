@@ -16,7 +16,7 @@ const productRoutes = require('./routes/product');
 
 // db
 
-const url = 'mongodb+srv://prasankumar248:Prasanna9688045516@cluster0.24gcg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const url = 'mongodb+srv://<username>:<password>@cluster0.24gcg.mongodb.net/<databasename>?retryWrites=true&w=majority';
 
 mongoose.connect(url.toString(),{
     // useNewUrlParser: true,
