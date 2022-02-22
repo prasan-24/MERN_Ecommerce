@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link , withRouter} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Menu = ({history}) => (
 <nav class="bg-gray-800">
