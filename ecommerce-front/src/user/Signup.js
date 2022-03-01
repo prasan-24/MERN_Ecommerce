@@ -1,76 +1,118 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../core/Layout";
+
+import { makeStyles } from "@mui/styles";
+
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+
+import Button from "@mui/material/Button";
 
 import { API } from "../config";
 
-const Signup = () => {
-  const signUpForm = () => (
-    <div className="mt-10 sm:mt-0">
-      <div className="md:grid md:grid-cols-3 md:gap-6">
-        <div className="mt-5 md:mt-0 md:col-span-2">
-          <form action="#" method="POST">
-            <div className="shadow overflow-hidden sm:rounded-md">
-              <div className="px-4 py-5 bg-white sm:p-6">
-                <div className="grid grid-cols-6 gap-6">
-                  <div className="col-span-6 sm:col-span-3">
-                    <label
-                      for="first-name"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      name="first-name"
-                      id="first-name"
-                      autoComplete="given-name"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-3">
-                    <label
-                      for="first-name"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      autoComplete="given-name"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-                  <div className="col-span-6 sm:col-span-3">
-                    <label
-                      for="first-name"
-                      className="block text-sm font-medium text-gray-700"
-                    >
-                      Password
-                    </label>
-                    <input
-                      type="text"
-                      name="password"
-                      id="password"
-                      autoComplete="given-name"
-                      className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "8px",
+
+    "& .MuiTextField-root": {
+      margin: "16px",
+      width: "300px",
+    },
+    "& .MuiButtonBase-root": {
+      margin: "16px",
+    },
+  },
+}));
+
+export default function Signup() {
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    password: "",
+    error: "",
+    success: false,
+  });
+
+  const { name, email, password } = values;
+
+  const classes = useStyles();
+
+  const handleChange = (name) => (event) => {
+    setValues({ ...values, error: false, [name]: event.target.value });
+  };
+
+  const doSignUp = (user) => {
+    fetch(`${API}/signup`,{
+      method: "POST",
+      headers: {
+        Accept: 'application/json',
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user)
+    }).then((response)=>{
+
+    }).catch(err=>{
+      
+    })
+  };
+
+  const userSignUp = (event) => {
+    event.preventDefault();
+    doSignUp({name,email,password});
+  };
+
+  function signUpForm() {
+    return (
+      <form className={classes.root}>
+        <TextField
+          label="Name"
+          onChange={handleChange("name")}
+          variant="outlined"
+          required
+          value={name}
+        />
+        <TextField
+          label="Email"
+          onChange={handleChange("email")}
+          variant="outlined"
+          type="email"
+          required
+          value={email}
+        />
+        <TextField
+          label="Password"
+          variant="outlined"
+          type="password"
+          onChange={handleChange("password")}
+          required
+          value={password}
+        />
+        <div>
+          <Button
+            type="submit"
+            onClick={userSignUp}
+            variant="contained"
+            color="primary"
+          >
+            Signup
+          </Button>
         </div>
-      </div>
-    </div>
-  );
+      </form>
+    );
+  }
 
   return (
-    <Layout title="Sign Up" description="Register Your Account">
+    <Layout
+      title="Sign Up"
+      description="Register Your Account"
+      className="container"
+    >
       {signUpForm()}
+      {JSON.stringify(values)}
     </Layout>
   );
-};
-
-export default Signup;
+}
