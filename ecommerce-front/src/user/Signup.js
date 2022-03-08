@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 
 import Button from "@mui/material/Button";
 
-import { API } from "../config";
+import { doSignUp } from "../auth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +37,7 @@ export default function Signup() {
     success: false,
   });
 
-  const { name, email, password } = values;
+  const { name, email, password, error, success } = values;
 
   const classes = useStyles();
 
@@ -45,25 +45,31 @@ export default function Signup() {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  const doSignUp = (user) => {
-    fetch(`${API}/signup`,{
-      method: "POST",
-      headers: {
-        Accept: 'application/json',
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user)
-    }).then((response)=>{
-
-    }).catch(err=>{
-      
-    })
-  };
-
   const userSignUp = (event) => {
     event.preventDefault();
-    doSignUp({name,email,password});
+    setValues({ ...values, error: false });
+    doSignUp({ name, email, password }).then((data) => {
+      if (data.error) {
+        setValues({ ...values, error: data.error, success: false });
+      } else {
+        setValues({
+          name: "",
+          email: "",
+          password: "",
+          error: "",
+          success: true,
+        });
+      }
+    });
   };
+
+  function showError() {
+    return <div style={{ display: error ? "" : "none" }}>{error}</div>;
+  }
+
+  function showSuccess() {
+    return <div style={{ display: success ? "" : "none" }}>{error}</div>;
+  }
 
   function signUpForm() {
     return (
@@ -111,6 +117,8 @@ export default function Signup() {
       description="Register Your Account"
       className="container"
     >
+      {showError()}
+      {showSuccess()}
       {signUpForm()}
       {JSON.stringify(values)}
     </Layout>
