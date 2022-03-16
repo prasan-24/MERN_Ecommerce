@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 
@@ -16,7 +17,7 @@ const productRoutes = require('./routes/product');
 
 // db
 
-const url = '';
+const url = process.env.DATABASE;
 
 mongoose.connect(url.toString(),{
     // useNewUrlParser: true,
