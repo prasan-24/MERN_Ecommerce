@@ -47,7 +47,7 @@ export default function Signin() {
     setValues({ ...values, error: false, [name]: event.target.value });
   };
 
-  const userSignUp = (event) => {
+  const userSignin = (event) => {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
     doSignin({ email, password }).then((data) => {
@@ -108,7 +108,7 @@ export default function Signin() {
               <div class="mt-10">
                 <input
                   type="submit"
-                  onClick={userSignUp}
+                  onClick={userSignin}
                   value="Sign In"
                   class="py-3 bg-green-500 text-white w-full rounded hover:bg-green-600"
                 />
