@@ -51,6 +51,7 @@ export default function Signin() {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
     doSignin({ email, password }).then((data) => {
+      console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
@@ -77,7 +78,7 @@ export default function Signin() {
     }
   };
 
-  function signUpForm() {
+  function signInForm() {
     return (
       <React.Fragment>
         <div class="flex min-h-screen bg-white">
@@ -133,9 +134,8 @@ export default function Signin() {
     >
       {showError()}
       {showLoading()}
-      {signUpForm()}
+      {signInForm()}
       {redirectUser()}
-      {JSON.stringify(values)}
     </Layout>
   );
 }
