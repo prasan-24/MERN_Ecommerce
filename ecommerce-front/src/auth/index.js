@@ -33,3 +33,25 @@ export const doSignin = (user) => {
       console.log(err);
     });
 };
+
+export const aunthenticate = (data, next) => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("secretToken", JSON.stringify(data));
+  }
+
+  next();
+};
+
+export const signout = (next) => {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("secretToken");
+  }
+  next();
+  return fetch(`${API}/signout`, {})
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

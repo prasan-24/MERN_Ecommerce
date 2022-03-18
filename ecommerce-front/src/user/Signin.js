@@ -10,7 +10,7 @@ import TextField from "@mui/material/TextField";
 
 import Button from "@mui/material/Button";
 
-import { doSignin } from "../auth";
+import { doSignin , aunthenticate } from "../auth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,11 +51,12 @@ export default function Signin() {
     event.preventDefault();
     setValues({ ...values, error: false, loading: true });
     doSignin({ email, password }).then((data) => {
-      console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error, loading: false });
       } else {
-        setValues({ ...values, redirectToReferrer: true });
+        aunthenticate(data,()=>{
+          setValues({ ...values, redirectToReferrer: true });
+        })
       }
     });
   };
