@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { signout } from "../auth/index";
+import { signout, isAuthenticated } from "../auth/index";
 
 const Menu = ({ history }) => (
   <nav class="bg-gray-800">
@@ -18,26 +18,38 @@ const Menu = ({ history }) => (
               </Link>
               <Link
                 className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                to="/signin"
+                to="/dashboard"
               >
-                Sign in
+                Dashboard
               </Link>
-              <Link
-                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                to="/signup"
-              >
-                Sign Up
-              </Link>
-              <span
-                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                onClick={()=>{
-                  signout(()=>{
-                    history.push("/");
-                  })
-                }}
-              >
-                Sign out
-              </span>
+              {!isAuthenticated() && (
+                <React.Fragment>
+                  <Link
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    to="/signin"
+                  >
+                    Sign in
+                  </Link>
+                  <Link
+                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    to="/signup"
+                  >
+                    Sign Up
+                  </Link>
+                </React.Fragment>
+              )}
+              {isAuthenticated() && (
+                <span
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  onClick={() => {
+                    signout(() => {
+                      history.push("/");
+                    });
+                  }}
+                >
+                  Sign out
+                </span>
+              )}
             </div>
           </div>
         </div>

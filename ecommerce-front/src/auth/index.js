@@ -55,3 +55,17 @@ export const signout = (next) => {
       console.log(err);
     });
 };
+
+
+export const isAuthenticated = () =>{
+  if(typeof window === 'undefined'){
+    return false;
+  }
+
+  if(localStorage.getItem('secretToken')){
+    return JSON.parse(localStorage.getItem('secretToken'));
+  } else {
+    return false;
+  }
+
+}
