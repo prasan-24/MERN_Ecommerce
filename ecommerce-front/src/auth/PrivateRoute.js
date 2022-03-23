@@ -1,20 +1,23 @@
-import React, { Component } from "react";
-import { Route, Navigate , Redirect } from "react-router-dom";
+import React, { Component , useEffect } from "react";
+import { Route, useNavigate, Redirect , Navigate } from "react-router-dom";
 import { isAuthenticated } from "./index";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      isAuthenticated() ? (
-        <Component />
-      ) : (
-        <Redirect
-          to={{ pathname: "/signin", state: { from: props.location } }}
-        />
-      )
-    }
-  />
-);
+import Dashboard from "../user/UserDashboard";
+
+const PrivateRoute = () => {
+
+  // const navigate = useNavigate();
+
+  // function redictToSignIn() {
+  //   console.log('testtesttest');
+  //   return 
+  // }
+
+  //navigate('/signin')}
+
+  console.log(isAuthenticated());
+
+  return <>{isAuthenticated() ? <Dashboard /> : <Navigate to={'/signin'} />} </>;
+};
 
 export default PrivateRoute;
