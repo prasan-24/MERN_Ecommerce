@@ -15,8 +15,6 @@ const PrivateRoute = () => {
 
   //navigate('/signin')}
 
-  console.log(isAuthenticated());
-
   return <>{isAuthenticated() ? <Dashboard /> : <Navigate to={'/signin'} />} </>;
 };
 

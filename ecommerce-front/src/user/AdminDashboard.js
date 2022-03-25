@@ -6,12 +6,12 @@ import { isAuthenticated } from "../auth";
 
 import { Link } from "react-router-dom";
 
-const Dashboard = () => {
+const AdminDashboard = () => {
   const {
     user: { _id, name, email, role },
   } = isAuthenticated();
 
-  const userLinks = () => {
+  const adminLinks = () => {
     return (
       <div className="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
         <div className="px-5 pb-5">
@@ -22,17 +22,17 @@ const Dashboard = () => {
             <li className="p-4 hover:bg-gray-50 cursor-pointer">
               <Link
                 className="hover:text-black transition duration-200 ease-linear"
-                to={"/cart"}
+                to={"/create/category"}
               >
-                My Cart
+                Create Category
               </Link>
             </li>
             <li className="p-4 hover:bg-gray-50 cursor-pointer">
               <Link
                 className="hover:text-black transition duration-200 ease-linear"
-                to={"/profile/update"}
+                to={"/create/product"}
               >
-                Update Profile
+                Create Product
               </Link>
             </li>
           </ul>
@@ -41,12 +41,12 @@ const Dashboard = () => {
     );
   };
 
-  const userInformation = () => {
+  const adminInformation = () => {
     return (
       <div className="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700">
         <div className="px-5 pb-5">
           <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">
-            Personal Information
+            Admin Information
           </h3>
           <ul className="divide-y divide-gray-300">
             <li className="p-4 hover:bg-gray-50">{name}</li>
@@ -97,12 +97,9 @@ const Dashboard = () => {
           />
         </div>
         <div class="grid grid-cols-5 gap-3 m-auto">
-          <div>{userLinks()}</div>
+          <div>{adminLinks()}</div>
           <div className="col-span-4">
-            <div class="grid grid-cols-1 gap-3">
-              <div>{userInformation()}</div>
-              <div>{purchaseHistory()}</div>
-            </div>
+            <div>{adminInformation()}</div>
           </div>
         </div>
       </div>
@@ -110,4 +107,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;

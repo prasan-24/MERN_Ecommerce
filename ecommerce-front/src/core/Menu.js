@@ -1,5 +1,5 @@
 import React from "react";
-import { Link , Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import { signout, isAuthenticated } from "../auth/index";
 
@@ -16,12 +16,22 @@ const Menu = ({ history }) => (
               >
                 Home
               </Link>
-              <Link
-                className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                to="/user/dashboard"
-              >
-                Dashboard
-              </Link>
+              {isAuthenticated() && isAuthenticated().user.role === 0 && (
+                <Link
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  to="/user/dashboard"
+                >
+                  Dashboard
+                </Link>
+              )}
+              {isAuthenticated() && isAuthenticated().user.role === 1 && (
+                <Link
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  to="/admin/dashboard"
+                >
+                  Dashboard
+                </Link>
+              )}
               {!isAuthenticated() && (
                 <React.Fragment>
                   <Link
@@ -43,7 +53,7 @@ const Menu = ({ history }) => (
                   className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   onClick={() => {
                     signout(() => {
-                      return <Navigate to={'/'} />
+                      return <Navigate to={"/"} />;
                     });
                   }}
                 >
