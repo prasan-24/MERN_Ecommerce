@@ -9,7 +9,8 @@ import Signup from "./user/Signup";
 import Signin from "./user/Signin";
 import Home from "./core/Home";
 import Menu from "./core/Menu";
-import Dashboard from "./user/UserDashboard";
+
+import AddCategory from "./admin/AddCategory";
 
 const RoutesComponent = () => {
   return (
@@ -21,6 +22,7 @@ const RoutesComponent = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/user/dashboard" element={<PrivateRoute />} />
         <Route path="/admin/dashboard" element={<AdminRoute />} />
+        <Route path="/create/category" element={<AddCategory />} />
       </Routes>
     </Router>
   );

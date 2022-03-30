@@ -2,7 +2,7 @@ import React, { Component, useEffect } from "react";
 import { Route, useNavigate, Redirect, Navigate } from "react-router-dom";
 import { isAuthenticated } from "./index";
 
-import Dashboard from "../user/UserDashboard";
+import Dashboard from "../user/AdminDashboard";
 
 const AdminRoute = () => {
   return (
