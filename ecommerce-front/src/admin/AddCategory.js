@@ -64,7 +64,6 @@ const AddCategory = () => {
                 onChange={handleChange}
               />
             </div>
-
             <div className="mt-10">
               <input
                 type="submit"
@@ -74,6 +73,10 @@ const AddCategory = () => {
               />
             </div>
           </form>
+          <div>
+            {showSuccess()}
+            {showError()}
+          </div>
         </div>
       </div>
     );

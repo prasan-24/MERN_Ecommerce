@@ -11,6 +11,7 @@ import Home from "./core/Home";
 import Menu from "./core/Menu";
 
 import AddCategory from "./admin/AddCategory";
+import AddProduct from "./admin/AddProduct";
 
 const RoutesComponent = () => {
   return (
@@ -23,6 +24,7 @@ const RoutesComponent = () => {
         <Route path="/user/dashboard" element={<PrivateRoute />} />
         <Route path="/admin/dashboard" element={<AdminRoute />} />
         <Route path="/create/category" element={<AddCategory />} />
+        <Route path="/create/product" element={<AddProduct />} />
       </Routes>
     </Router>
   );

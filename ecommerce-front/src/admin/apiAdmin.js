@@ -1,13 +1,13 @@
 import { API } from "../config";
 
 export const createCategory = (userId, token, category) => {
-    console.log(token);
+  console.log(token);
   return fetch(`${API}/category/create/${userId}`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(category),
   })
@@ -19,14 +19,16 @@ export const createCategory = (userId, token, category) => {
     });
 };
 
-export const doSignin = (user) => {
-  return fetch(`${API}/signin`, {
+export const createProduct = (userId, token, product) => {
+  console.log(token);
+  return fetch(`${API}/product/create/${userId}`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(user),
+    body: JSON.stringify(product),
   })
     .then((response) => {
       return response.json();
